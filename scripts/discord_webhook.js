@@ -6,6 +6,8 @@ const axios = require('axios');
 const TOKEN = process.env.DISCORD_TOKEN;
 const BOT_ID = process.env.BOT_ID;             // e.g. "123456789012345678"
 const N8N_WEBHOOK = process.env.N8N_WEBHOOK;   // e.g. "https://.../webhook/discord-trigger"
+const ID_GOAT = process.env.ID_GOAT;
+const ID_LULU = process.env.ID_LULU;
 
 if (!TOKEN || !BOT_ID || !N8N_WEBHOOK) {
   console.error('Missing env vars. Set DISCORD_TOKEN, BOT_ID, N8N_WEBHOOK in .env');
@@ -34,12 +36,17 @@ client.on(Events.MessageCreate, async (msg) => {
     // Check if the bot is mentioned
     // Safe check via mentions collection:
     const isMentioned = msg.mentions.users.has(BOT_ID);
+    const isGoat = (msg.author.id == ID_GOAT);
+    const isLulu = (msg.author.id == ID_LULU);
 
     // (Optional extra: also catch raw mention text)
     // const rawMention = [`<@${BOT_ID}>`, `<@!${BOT_ID}>`].some(t => msg.content.includes(t));
     // const mentioned = isMentioned || rawMention;
-    console.log("Debug : " + isMentioned)
-    if (!isMentioned) return;
+    console.log("isLulu: " + isLulu)
+    console.log("Lulu + mention : " + (isMentioned && isLulu))
+    // if (!isMentioned && !isGoat) return;
+    if (!isMentioned && !isLulu && !isGoat) return;
+    // if (!isMentioned) return;
 
     // Build payload for n8n (raw-ish but compact)
     const payload = {
