@@ -1,0 +1,18 @@
+{
+  "name": "discord-n8n-listener",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "discord.js": "^14.22.1",
+    "dotenv": "^17.2.3"
+  }
+}

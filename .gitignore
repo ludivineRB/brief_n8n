@@ -1,0 +1,7 @@
+node_modules/
+.env
+*.conf
+*.pub
+*.opts
+volumes/postgres_data/
+volumes/ollama_data/
