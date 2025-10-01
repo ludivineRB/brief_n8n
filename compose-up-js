@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Always run from the script's directory (repo root)
+cd "$(dirname "$0")"
+
+# Optional: check for compose file to avoid accidental runs elsewhere
+if [ ! -f "docker-compose.yml" ] && [ ! -f "compose.yml" ]; then
+  echo "No docker-compose.yml or compose.yml found here." >&2
+  exit 1
+fi
+
+# Bring the stack up. 
+# Pass through any flags you give to this wrapper (e.g. ./compose-up -d --build)
+docker compose up "$@"
+
+# Run your local JS afterwards (adjust path if needed)
+if [ -f "./scripts/discord_webhook.js" ]; then
+  echo "Running local post-up script: scripts/discord_webhook.js"
+  node ./scripts/discord_webhook.js
+else
+  echo "WARNING: scripts/discord_webhook.js not found; skipping." >&2
+fi

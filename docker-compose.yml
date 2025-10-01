@@ -22,7 +22,7 @@ services:
     ports:
       - "5678:5678"
     volumes:
-      - ./volumes/n8n_data:/root/.n8n
+      - ./volumes/n8n_data:/home/node/.n8n
     networks:
       - n8n_network
     depends_on:
