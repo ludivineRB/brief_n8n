@@ -1,7 +1,10 @@
 node_modules/
 .env
+.env2
 *.conf
 *.pub
 *.opts
 volumes/postgres_data/
 volumes/ollama_data/
+volumes/n8n_data/
+tips.txt
